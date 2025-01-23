@@ -1,0 +1,41 @@
+{% extends "core/index.html" %}
+{% block title %}HRMS| Home{% endblock title %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-primary" href="#">HRMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto"> <!-- Align items to the right -->
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 d-flex justify-content-center align-items-center flex-column" style="height: 80vh;">
+    <h1 class="text-center fw-bold text-dark">Welcome, {{ request.user }}!</h1>
+    <p class="text-center mt-3" style="color: #28a745; font-size: 1.2rem;">
+        This is your HR Management System. Navigate through the menu to explore the features.
+    </p>
+    <a href="{% url 'login' %}" class="btn btn-primary mt-4 px-4 py-2">
+        Please Login
+    </a>
+</div>
+
+{% endblock content %}
